@@ -7,46 +7,51 @@ import AllSpot from "./Components/Navbar/Pages/AllSpot";
 import AddSpot from "./Components/Navbar/Pages/AddSpot";
 import MyList from "./Components/Navbar/Pages/MyList";
 import Login from "./AuthProvider/Login";
-import SignUp from "./AuthProvider/SignUp";
 import Home from "./Components/Navbar/Pages/Home";
 import Error from "./Components/Navbar/Pages/Error";
+// import SignUp from "./AuthProvider/SignUp";
+import Authentication from "./AuthProvider/Authentication";
+import SignUp from "./AuthProvider/SignUp";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App> ,
+    element: <App></App>,
     errorElement: <Error></Error>,
-    children:[
+    children: [
       {
         path: "/",
-        element: <Home></Home>
+        element: <Home></Home>,
+        loader: () => fetch("http://localhost:5000/touristSpot"),
       },
       {
         path: "/allspot",
-        element: <AllSpot></AllSpot>
+        element: <AllSpot></AllSpot>,
       },
       {
         path: "/addspot",
-        element: <AddSpot></AddSpot>
+        element: <AddSpot></AddSpot>,
       },
       {
         path: "/mylist",
-        element: <MyList></MyList>
+        element: <MyList></MyList>,
       },
       {
         path: "/login",
-        element: <Login></Login>
+        element: <Login></Login>,
       },
       {
         path: "/signup",
-        element: <SignUp></SignUp>
-      }
-
-    ]
+        element: <SignUp></SignUp>,
+      },
+    ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Authentication>
+      <RouterProvider router={router} />
+    </Authentication>
   </React.StrictMode>
 );
