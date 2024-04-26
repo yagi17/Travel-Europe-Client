@@ -8,11 +8,18 @@ import AddSpot from "./Components/Navbar/Pages/AddSpot";
 import MyList from "./Components/Navbar/Pages/MyList";
 import Login from "./AuthProvider/Login";
 import SignUp from "./AuthProvider/SignUp";
+import Home from "./Components/Navbar/Pages/Home";
+import Error from "./Components/Navbar/Pages/Error";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App> ,
+    errorElement: <Error></Error>,
     children:[
+      {
+        path: "/",
+        element: <Home></Home>
+      },
       {
         path: "/allspot",
         element: <AllSpot></AllSpot>

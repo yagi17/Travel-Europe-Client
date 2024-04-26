@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const link = (
@@ -10,32 +10,59 @@ const Navbar = () => {
             isActive
               ? "bg-none text-gray-800"
               : isPending
-              ? "px-3 rounded-lg py-2 pending"
-              : "px-3 rounded-lg py-2"
+              ? "pending"
+              : "pending"
           }
         >
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink to="/allspot">All Tourists Spot</NavLink>
+        <NavLink
+          to="/allspot"
+          className={({ isActive, isPending }) =>
+            isActive
+              ? "bg-none text-gray-800"
+              : isPending
+              ? "pending"
+              : "pending"
+          }
+        >
+          All Tourists Spot
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/addspot">Add Tourists Spot</NavLink>
+        <NavLink
+          to="/addspot"
+          className={({ isActive, isPending }) =>
+            isActive
+              ? "bg-none text-gray-800"
+              : isPending
+              ? "pending"
+              : "pending"
+          }
+        >
+          Add Tourists Spot
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/mylist">My List</NavLink>
-      </li>
-      <li>
-        <NavLink to="/login">Login”,</NavLink>
-      </li>
-      <li>
-        {/* <NavLink to="/">My List</NavLink> */}
+        <NavLink
+          to="/mylist"
+          className={({ isActive, isPending }) =>
+            isActive
+              ? "bg-none text-gray-800"
+              : isPending
+              ? "pending"
+              : "pending"
+          }
+        >
+          My List
+        </NavLink>
       </li>
     </>
   );
   return (
-    <div className="navbar glass">
+    <div className="navbar bg-transparent text-3xl font-semibold">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -56,18 +83,32 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 rounded-box w-52"
           >
             {link}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <Link to='/' className="text-xl flex items-center space-x-2">
+            <img className="size-8" src="/logo.png" alt="" />
+            <p>Travel Europe</p>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{link}</ul>
       </div>
-      <div className="navbar-end">
-        <a className="btn">Button</a>
+      <div className="navbar-end mr-6">
+        <NavLink
+          to="/login"
+          className={({ isActive, isPending }) =>
+            isActive
+              ? "bg-none text-gray-800"
+              : isPending
+              ? "pending"
+              : "pending"
+          }
+        >
+          Login
+        </NavLink>
       </div>
     </div>
   );
