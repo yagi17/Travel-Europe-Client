@@ -59,11 +59,13 @@ const AddSpot = () => {
   };
 
   return (
-    <div className="bg-[#F4F3F0] p-24 max-h-full ">
-      <h2 className="text-5xl font-bold text-center mb-10">
+    <div className="bg-[#F4F3F0] pt-5 max-h-full ">
+      {/* <h2 className="text-5xl font-bold text-center mb-10">
         Add Tourist Spots
-      </h2>
-      <form onSubmit={handleCoffee}>
+      </h2> */}
+      <form 
+      onSubmit={handleCoffee} 
+      className=" w-8/12 mx-auto ">
         {/* form name and nic name row */}
         <div className="md:flex mb-6 ">
           <label className="form-control md:w-1/2 mr-4 relative">

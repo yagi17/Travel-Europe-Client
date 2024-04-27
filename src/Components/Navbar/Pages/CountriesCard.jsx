@@ -1,39 +1,34 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const CountriesCard = ({ countri, countries, setCountries }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const {
-    country,
-    spotName,
-    location,
-    photo,
-    description,
-    cost,
-    details,
-    season,
-    days,
-  } = countri;
+  const { name, image, description, flag } = countri;
   return (
     <div>
       <div
-        className="card card-compact bg-base-100 shadow-xl"
+        className="card card-compact rounded-lg bg-base-100 h-[400px] shadow-xl"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         <figure>
           <img
-            className={` transform transition duration-500  ${
-              isHovered ? "scale-110" : "scale-100"
+            className={` transform transition duration-500 w-96 h-[200px]  ${
+              isHovered ? "scale-105" : "scale-100"
             }`}
-            src="https://www.state.gov/wp-content/uploads/2023/07/shutterstock_667548661v2.jpg"
+            src={image}
             alt="Cover"
           />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">Country: {country}</h2>
-          <p>Spot Name: {spotName}</p>
-          <p>Location: {location}</p>
-          {/* <p>Location: {location}</p> */}
+          <h2 className="card-title">
+            Country: {name}
+            <div className="badge p-0 "><img className="w-6 rounded-full h-4" src={flag} alt="" /></div>
+          </h2>
+          <p>{description}</p>
+          <button className={`btn w-full mt-4 btn-primary transform transition duration-500 ${
+              isHovered ? "text-lg" : "text-base"
+            }`}><Link>View Spots</Link></button>
         </div>
       </div>
     </div>
