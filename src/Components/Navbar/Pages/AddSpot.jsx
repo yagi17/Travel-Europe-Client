@@ -1,6 +1,11 @@
 import Swal from "sweetalert2";
+import { useContext } from "react";
+import { AuthContext } from "../../../AuthProvider/Authentication";
 
 const AddSpot = () => {
+  const { user } = useContext(AuthContext);
+  console.log(user);
+
   const handleCoffee = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -13,6 +18,8 @@ const AddSpot = () => {
     const details = form.details.value;
     const season = form.season.value;
     const days = form.days.value;
+    const userName = user.displayName;
+    const userEmail = user.email;
 
     const newSpot = {
       country,
@@ -24,6 +31,8 @@ const AddSpot = () => {
       details,
       season,
       days,
+      userName,
+      userEmail,
     };
 
     console.log(newSpot);
@@ -57,7 +66,7 @@ const AddSpot = () => {
       <form onSubmit={handleCoffee}>
         {/* form name and nic name row */}
         <div className="md:flex mb-6 ">
-          <label className="form-control md:w-1/2 mr-4">
+          <label className="form-control md:w-1/2 mr-4 relative">
             <div className="label">
               <span className="label-text text-xl font-semibold">
                 Country Name
@@ -75,10 +84,10 @@ const AddSpot = () => {
               <option value="Netherlands">Netherlands</option>
               <option value="Switzerland">Switzerland</option>
             </select>
-
+            <div className="absolute top-3/4 right-[16px] -translate-y-1/2 w-[30px] h-[30px] bg-no-repeat bg-center bg-[length:85%]">
+              {" "}
+            </div>
           </label>
-          
-
           <label className="form-control md:w-1/2">
             <div className="label">
               <span className="label-text text-xl font-semibold">
@@ -121,7 +130,7 @@ const AddSpot = () => {
             />
           </label>
         </div>
-        {/* form category and details row */}
+        {/* form Cost and details row */}
         <div className="md:flex mb-6 ">
           <label className="form-control md:w-1/2 mr-4">
             <div className="label">
@@ -130,12 +139,11 @@ const AddSpot = () => {
               </span>
             </div>
             <input
-              type="text"
+              type="number"
               name="avgCost"
               placeholder="Avarage Cost"
               className="input input-bordered w-full"
             />
-
           </label>
 
           <label className="form-control md:w-1/2">
@@ -224,7 +232,6 @@ const AddSpot = () => {
             <span className="text-xl font-semibold">Travel Time</span>
           </div>
         </div>
-
         <input
           type="submit"
           value="Add New Location"

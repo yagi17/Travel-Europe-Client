@@ -21,11 +21,12 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch("https://travel-europe-server.vercel.app/touristSpot"),
+        loader: () => fetch("http://localhost:5000/touristSpot"),
       },
       {
         path: "/allspot",
         element: <AllSpot></AllSpot>,
+        loader: () => fetch("http://localhost:5000/touristSpot"),
       },
       {
         path: "/addspot",
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
       {
         path: "/mylist",
         element: <MyList></MyList>,
-        loader: () => fetch("hhttps://travel-europe-server-iqzzdk6gx-nafis-projects-48f913c3.vercel.app/touristSpot"),
+        loader: () => fetch("http://localhost:5000/touristSpot"),
       },
       {
         path: "/login",

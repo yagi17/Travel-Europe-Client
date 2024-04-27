@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const CountriesCard = ({ countri, countries, setCountries }) => {
+const AllSpotCard = ({ countri, countries, setCountries }) => {
   const [isHovered, setIsHovered] = useState(false);
   const {
     country,
@@ -31,7 +31,11 @@ const CountriesCard = ({ countri, countries, setCountries }) => {
         </figure>
         <div className="card-body">
           <h2 className="card-title">Country: {country}</h2>
+          <p>{description}</p>
           <p>Spot Name: {spotName}</p>
+          <p>Average Cost: {cost}</p>
+          <p>Travel Duration: {days}</p>
+          <p>Preferable Season: {season}</p>
           <p>Location: {location}</p>
           {/* <p>Location: {location}</p> */}
         </div>
@@ -40,4 +44,4 @@ const CountriesCard = ({ countri, countries, setCountries }) => {
   );
 };
 
-export default CountriesCard;
+export default AllSpotCard;

@@ -11,12 +11,62 @@ const SignUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const naviGate = location?.state || "/";
+
+  // send data og googleLogin, gitHubLogin
   const handleSocial = (socialProvider) => {
     socialProvider().then((result) => {
       if (result.user) {
+        const email = result.user.email;
+        const creationTime = result.user.metadata.creationTime;
+        const user = { email, creationTime };
+        console.log(user);
+
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.insertedId) {
+              Swal.fire({
+                title: "User has been created successfully!",
+                icon: "success",
+              });
+            }
+          });
+
         navigate(naviGate);
       }
     });
+  };
+
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const validatePassword = (password) => {
+    // Check for uppercase letter
+    if (!/[A-Z]/.test(password)) {
+      return "Password must contain at least one uppercase letter";
+    }
+    // Check for lowercase letter
+    if (!/[a-z]/.test(password)) {
+      return "Password must contain at least one lowercase letter";
+    }
+    // Check for length
+    if (password.length < 6) {
+      return "Password must be at least 6 characters long";
+    }
+    return "";
+  };
+
+  const handlePasswordChange = (e) => {
+    const password = e.target.value;
+    const passwordError = validatePassword(password);
+    setPasswordError(passwordError);
   };
 
   const handleSignUp = (e) => {
@@ -25,30 +75,46 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    // console.log(email, password);
-    createUser(email, password).then((result) => {
-      navigate("/");
-      console.log(result.user);
-      const createTime = result.user.metadata.creationTime;
-      const user = { email, password, creationTime: createTime };
-      fetch("http://localhost:5000/users", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(user),
+    const passwordError = validatePassword(password);
+    if (passwordError) {
+      setPasswordError(passwordError);
+      return;
+    }
+
+    setEmailError();
+
+    googleLogIn();
+
+    createUser(email, password)
+      .then((result) => {
+        navigate("/");
+        console.log(result.user);
+        const createTime = result.user.metadata.creationTime;
+        const user = { email, password, creationTime: createTime };
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.insertedId) {
+              Swal.fire({
+                title: "User has been created successfully!",
+                icon: "success",
+              });
+            }
+          });
       })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          if (data.insertedId) {
-            Swal.fire({
-              title: "User has been created successfully!",
-              icon: "success",
-            });
-          }
-        });
-    });
+      .catch((error) => {
+        console.log(error.message);
+        if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+          setEmailError("Email already in use");
+        }
+      });
   };
 
   //   toggle show password
@@ -77,6 +143,9 @@ const SignUp = () => {
                   className="input input-bordered"
                   required
                 />
+                {emailError && (
+                  <p className="text-red-500 text-xs mt-1 pl-2">{emailError}</p>
+                )}
               </div>
               <div className="form-control relative">
                 <label className="label">
@@ -88,7 +157,13 @@ const SignUp = () => {
                   placeholder="password"
                   className="input input-bordered"
                   required
+                  onChange={handlePasswordChange} // Add this line
                 />
+                {passwordError && (
+                  <p className="text-red-500 text-xs pt-1 ml-2">
+                    {passwordError}
+                  </p>
+                )}
                 <button
                   type="button"
                   className={`absolute top-1/2 right-[16px] -translate-y-1/2 w-[30px] h-[30px] bg-no-repeat bg-center bg-[length:85%] ${

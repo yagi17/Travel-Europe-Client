@@ -110,7 +110,7 @@ const Navbar = () => {
             >
               <div className="relative rounded-full avatar w-8 h-8">
                 <img
-                  className="w-full h-full "
+                  className="w-full rounded-full h-full "
                   alt="user_profile"
                   src={
                     user?.photoURL ||
