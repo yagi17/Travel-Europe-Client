@@ -26,7 +26,7 @@ const AddSpot = () => {
       days,
     };
 
-    // console.log(newSpot);
+    console.log(newSpot);
 
     fetch("http://localhost:5000/touristSpot", {
       method: "POST",
@@ -37,7 +37,6 @@ const AddSpot = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
         if (data.insertedId) {
           Swal.fire({
             title: "Success!",
@@ -45,6 +44,7 @@ const AddSpot = () => {
             icon: "success",
             confirmButtonText: "Done",
           });
+          form.reset();
         }
       });
   };
@@ -63,13 +63,21 @@ const AddSpot = () => {
                 Country Name
               </span>
             </div>
-            <input
-              type="text"
+            <select
               name="countryName"
               placeholder="Country Name"
               className="input input-bordered w-full"
-            />
+            >
+              <option value="France">France</option>
+              <option value="Italy">Italy</option>
+              <option value="Spain">Spain</option>
+              <option value="England">England</option>
+              <option value="Netherlands">Netherlands</option>
+              <option value="Switzerland">Switzerland</option>
+            </select>
+
           </label>
+          
 
           <label className="form-control md:w-1/2">
             <div className="label">
@@ -114,7 +122,7 @@ const AddSpot = () => {
           </label>
         </div>
         {/* form category and details row */}
-        <div className="md:flex mb-6">
+        <div className="md:flex mb-6 ">
           <label className="form-control md:w-1/2 mr-4">
             <div className="label">
               <span className="label-text text-xl font-semibold">
@@ -127,6 +135,7 @@ const AddSpot = () => {
               placeholder="Avarage Cost"
               className="input input-bordered w-full"
             />
+
           </label>
 
           <label className="form-control md:w-1/2">
@@ -218,7 +227,7 @@ const AddSpot = () => {
 
         <input
           type="submit"
-          value="Add Player"
+          value="Add New Location"
           className="btn btn-block bg-slate-700 text-white hover:bg-slate-700 hover:text-base"
         />
       </form>

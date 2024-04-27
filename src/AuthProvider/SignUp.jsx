@@ -1,13 +1,23 @@
-import { useContext, useState } from "react";
 import Swal from "sweetalert2";
-import { AuthContext } from "./Authentication";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import UseAuth from "./UseAuth";
+import { useState } from "react";
+import { FaGithub } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
-  //   console.log(useContext());
+  const { createUser, googleLogIn, gitHubLogin } = UseAuth();
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const naviGate = location?.state || "/";
+  const handleSocial = (socialProvider) => {
+    socialProvider().then((result) => {
+      if (result.user) {
+        navigate(naviGate);
+      }
+    });
+  };
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -15,7 +25,7 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    console.log(email, password);
+    // console.log(email, password);
     createUser(email, password).then((result) => {
       navigate("/");
       console.log(result.user);
@@ -34,7 +44,6 @@ const SignUp = () => {
           if (data.insertedId) {
             Swal.fire({
               title: "User has been created successfully!",
-              //   text: "Login Now",
               icon: "success",
             });
           }
@@ -50,13 +59,13 @@ const SignUp = () => {
 
   return (
     <div>
-      <div className="hero h-full border bg-base-200">
+      <div className="hero h-full">
         <div className="hero-content flex-col">
-          <div className="text-center border lg:text-left">
+          <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold">Sign Up!</h1>
           </div>
-          <div className="card shrink-0 w-96 w border p-0 shadow-2xl bg-base-100">
-            <form onSubmit={handleSignUp} className="card-body">
+          <div className="card shrink-0 w-96 shadow-2xl bg-base-100">
+            <form onSubmit={handleSignUp} className="card-body pb-0">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -101,6 +110,27 @@ const SignUp = () => {
                 className="btn btn-block bg-slate-700 text-white hover:bg-slate-700 hover:text-base"
               />
             </form>
+            <div className="text-center space-x-4">
+              <div className="divider">Continue With</div>
+              <button
+                onClick={() => handleSocial(googleLogIn)}
+                className="hover:scale-105 text-4xl"
+              >
+                <FcGoogle />
+              </button>
+              <button
+                onClick={() => handleSocial(gitHubLogin)}
+                className="hover:scale-105 text-4xl"
+              >
+                <FaGithub />
+              </button>
+            </div>
+            <label className="text-center mb-6">
+              <span>Already have an account? </span>
+              <Link to="/login" className="link link-hover text-blue-500">
+                LogIn
+              </Link>
+            </label>
           </div>
         </div>
       </div>

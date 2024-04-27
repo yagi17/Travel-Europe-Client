@@ -9,7 +9,6 @@ import MyList from "./Components/Navbar/Pages/MyList";
 import Login from "./AuthProvider/Login";
 import Home from "./Components/Navbar/Pages/Home";
 import Error from "./Components/Navbar/Pages/Error";
-// import SignUp from "./AuthProvider/SignUp";
 import Authentication from "./AuthProvider/Authentication";
 import SignUp from "./AuthProvider/SignUp";
 
@@ -22,7 +21,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch("http://localhost:5000/touristSpot"),
+        loader: () => fetch("https://travel-europe-server.vercel.app/touristSpot"),
       },
       {
         path: "/allspot",
@@ -35,6 +34,7 @@ const router = createBrowserRouter([
       {
         path: "/mylist",
         element: <MyList></MyList>,
+        loader: () => fetch("hhttps://travel-europe-server-iqzzdk6gx-nafis-projects-48f913c3.vercel.app/touristSpot"),
       },
       {
         path: "/login",

@@ -1,6 +1,11 @@
+import { useContext } from "react";
+import { IoIosLogOut, IoIosLogIn } from "react-icons/io";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../AuthProvider/Authentication";
+import { CiEdit } from "react-icons/ci";
 
 const Navbar = () => {
+  const { user, logout } = useContext(AuthContext);
   const link = (
     <>
       <li>
@@ -62,7 +67,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar text-3xl font-semibold">
+    <div className="navbar text-2xl font-semibold p-0">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -88,27 +93,67 @@ const Navbar = () => {
             {link}
           </ul>
         </div>
-        <Link to='/' className="text-xl flex items-center space-x-2">
-            <img className="size-8" src="/logo.png" alt="" />
-            <p>Travel Europe</p>
+        <Link to="/" className="text-xl flex items-center space-x-2">
+          <img className="size-8" src="/logo.png" alt="" />
+          <p>Travel Europe</p>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{link}</ul>
       </div>
-      <div className="navbar-end mr-6">
-        <NavLink
-          to="/login"
-          className={({ isActive, isPending }) =>
-            isActive
-              ? "bg-none text-gray-800"
-              : isPending
-              ? "pending"
-              : "pending"
-          }
-        >
-          Login
-        </NavLink>
+      <div className="navbar-end group relative pr-4">
+        {user ? (
+          <div className="flex space-x-2">
+            <div
+              className="dropdown dropdown-end z-20 tooltip tooltip-bottom"
+              data-tip={user?.displayName || "user name"}
+            >
+              <div className="relative rounded-full avatar w-8 h-8">
+                <img
+                  className="w-full h-full "
+                  alt="user_profile"
+                  src={
+                    user?.photoURL ||
+                    "https://static.vecteezy.com/system/resources/previews/005/005/788/original/user-icon-in-trendy-flat-style-isolated-on-grey-background-user-symbol-for-your-web-site-design-logo-app-ui-illustration-eps10-free-vector.jpg"
+                  }
+                />
+              </div>
+            </div>
+            <div>
+              <Link
+                to="/login"
+                onClick={() => logout()}
+                className={({ isActive, isPending }) =>
+                  isActive
+                    ? "bg-none text-xl text-gray-800"
+                    : isPending
+                    ? "pending"
+                    : "pending"
+                }
+              >
+                <span className="flex text-lg items-center gap-1">
+                  Log Out <IoIosLogOut />
+                </span>
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <Link
+            to="/login"
+            className={({ isActive, isPending }) =>
+              isActive
+                ? "bg-none text-lg text-gray-800"
+                : isPending
+                ? "pending"
+                : "pending"
+            }
+          >
+            <span className="flex text-lg items-center gap-1">
+              {" "}
+              Login <IoIosLogIn />
+            </span>
+          </Link>
+        )}
       </div>
     </div>
   );

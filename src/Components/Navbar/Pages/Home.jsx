@@ -9,12 +9,12 @@ import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 
 const Home = () => {
-  const data = useLoaderData();
+  const data = useLoaderData().slice(0, 6)
 
   const [countries, setCountries] = useState(data);
 
   return (
-    <div className="h-[650px] bg-[url(https://i.ibb.co/zx2tcDF/image.png)] bg-cover bg-no-repeat ">
+    <div className="h-[650px] bg-[url(https://i.ibb.co/zx2tcDF/image.png)] bg-cover z-10 bg-no-repeat ">
       {/* banner */}
 
       <div className="hero-overlay bg-opacity-80 h-full items-center">
@@ -119,7 +119,7 @@ const Home = () => {
         <h2 className="text-center text-5xl text-green-500 font-bold">
           Choose Your Destination
         </h2>
-        <div className="mt-24 grid grid-cols-3 w-10/12 mx-auto gap-4">
+        <div className="mt-24 md:grid md:grid-cols-2 lg:grid lg:grid-cols-3 w-5/6 mx-auto gap-y-4 gap-4">
           {countries.map((countri) => (
             <CountriesCard
               key={countri._id}

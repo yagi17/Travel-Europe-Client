@@ -16,7 +16,7 @@ const CountriesCard = ({ countri, countries, setCountries }) => {
   return (
     <div>
       <div
-        className="card w-96 bg-base-100 shadow-xl image-full"
+        className="card lg:w-72 bg-base-100 shadow-xl image-full"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
