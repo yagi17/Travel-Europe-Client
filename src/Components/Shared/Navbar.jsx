@@ -29,7 +29,7 @@ const Navbar = () => {
           to="/"
           className={({ isActive, isPending }) =>
             isActive
-              ? "bg-none text-gray-800"
+              ? "bg-transparent  hover:bg-transparent"
               : isPending
               ? "pending"
               : "pending"
@@ -43,7 +43,7 @@ const Navbar = () => {
           to="/allspot"
           className={({ isActive, isPending }) =>
             isActive
-              ? "bg-none text-gray-800"
+              ? "bg-transparent  hover:bg-transparent"
               : isPending
               ? "pending"
               : "pending"
@@ -57,7 +57,7 @@ const Navbar = () => {
           to="/addspot"
           className={({ isActive, isPending }) =>
             isActive
-              ? "bg-none text-gray-800"
+              ? "bg-transparent  hover:bg-transparent"
               : isPending
               ? "pending"
               : "pending"
@@ -71,7 +71,7 @@ const Navbar = () => {
           to="/mylist"
           className={({ isActive, isPending }) =>
             isActive
-              ? "bg-none text-gray-800"
+              ? "bg-transparent  hover:bg-transparent"
               : isPending
               ? "pending"
               : "pending"
@@ -83,7 +83,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar text-2xl font-semibold py-0 md:px-6">
+    <div className="navbar text-2xl font-semibold py-0 md:px-6 ">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -181,7 +181,7 @@ const Navbar = () => {
                 onClick={() => logout()}
                 className={({ isActive, isPending }) =>
                   isActive
-                    ? "bg-none text-xl text-gray-800"
+                    ? "bg-transparent text-xl "
                     : isPending
                     ? "pending"
                     : "pending"
@@ -198,7 +198,7 @@ const Navbar = () => {
             to="/login"
             className={({ isActive, isPending }) =>
               isActive
-                ? "bg-none text-lg text-gray-800"
+                ? "bg-transparent text-lg "
                 : isPending
                 ? "pending"
                 : "pending"
