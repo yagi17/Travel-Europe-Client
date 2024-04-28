@@ -23,7 +23,7 @@ const SignUp = () => {
         const user = { email, creationTime };
 
         // Post the user data to backend
-        fetch("http://localhost:5000/users", {
+        fetch("https://travel-europe-server.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -32,7 +32,7 @@ const SignUp = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             if (data.insertedId) {
               // Notify user of success
               Swal.fire({
@@ -102,7 +102,7 @@ const SignUp = () => {
         const user = { email, password, creationTime: createTime };
 
         // Post the user data to backend
-        fetch("http://localhost:5000/users", {
+        fetch("https://travel-europe-server.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -111,7 +111,7 @@ const SignUp = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             if (data.insertedId) {
               Swal.fire({
                 title: "User has been created successfully!",

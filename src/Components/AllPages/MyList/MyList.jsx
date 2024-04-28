@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../AuthProvider/Authentication";
@@ -9,24 +9,18 @@ import Swal from "sweetalert2";
 const MyList = () => {
   const { user } = useContext(AuthContext);
   const { email } = user;
-  console.log(user);
+  // console.log(user);
 
   // const loadData = useLoaderData();
   const [myList, setMyList] = useState([]);
 
-
-  // Filter myList to only include items where userName matches user.displayName
-  // const filteredList = myList.filter((myItem) => myItem.userName === user.displayName );
-  // console.log(filteredList);
-  // console.log(filteredList.spotName);
-
-  useEffect(()=>{
-    fetch(`http://localhost:5000/touristSpot/myList/${email}`)
-    .then(res=> res.json())
-    .then(data=>{
-      setMyList(data)
-    })
-  },[email])
+  useEffect(() => {
+    fetch(`https://travel-europe-server.vercel.app/touristSpot/myList/${email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setMyList(data);
+      });
+  }, [email]);
   // console.log(myList);
 
   const handleDelete = (id) => {
@@ -41,14 +35,11 @@ const MyList = () => {
       confirmButtonText: "Yes, delete it !",
     }).then((result) => {
       if (result.isConfirmed) {
-        // console.log("delete confirm");
-
-        fetch(`http://localhost:5000/touristSpot/${id}`, {
+        fetch(`https://travel-europe-server.vercel.app/touristSpot/${id}`, {
           method: "delete",
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data.deletedCount > 0) {
               Swal.fire({
                 title: "Deleted!",
@@ -58,6 +49,7 @@ const MyList = () => {
               const remainingItems = myList.filter(
                 (listItem) => listItem._id !== id
               );
+              console.log(remainingItems._id);
               setMyList(remainingItems);
             }
           });
@@ -72,7 +64,7 @@ const MyList = () => {
       </Helmet>
       <table className="table">
         <thead>
-          <tr  className="bg-base-200">
+          <tr className="bg-base-200">
             <th>Item No.</th>
             <th>Country</th>
             <th>Spot Name</th>
@@ -88,11 +80,15 @@ const MyList = () => {
               <td>{myItem.spotName}</td>
               <td>{user.displayName}</td>
               <td>
-                <button
-                  onClick={() => handleDelete}
-                  className="btn hover:bg-transparent bg-transparent border-0 text-xl text-blue-500"
-                >
-                  <CiEdit />
+                <button>
+                  <Link
+                    to={`/updateDetails/${myItem._id}`}
+                    // onClick={() => handleDelete}
+                    className="btn hover:bg-transparent bg-transparent border-0 text-xl text-blue-500"
+                  >
+                    {" "}
+                    <CiEdit />
+                  </Link>
                 </button>
                 <button
                   onClick={() => handleDelete(myItem._id)}

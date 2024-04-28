@@ -1,28 +1,25 @@
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { useContext } from "react";
-import { AuthContext } from "../../../AuthProvider/Authentication";
-import { Helmet } from "react-helmet";
 
-const AddSpot = () => {
-  const { user } = useContext(AuthContext);
-  // console.log(user);
+const UpdateDetails = () => {
+  const { id } = useParams();
+
+  const navigate = useNavigate();
+  //   const location = useLocation();
+  const naviGate = "/myList";
 
   const handleDetails = (e) => {
     e.preventDefault();
     const form = e.target;
     const country = form.countryName.value;
     const spotName = form.touristsSpot.value;
-    // const location = form.location.value;
     const totalVisitorsPerYear = form.totalVisitorsPerYear.value;
     const cost = form.avgCost.value;
     const photo = form.photo.value;
-    // const details = form.details.value;
     const season = form.season.value;
     const days = form.days.value;
-    const userName = user.displayName;
-    const userEmail = user.email;
 
-    const newSpot = {
+    const updateDetails = {
       country,
       spotName,
       totalVisitorsPerYear,
@@ -30,41 +27,36 @@ const AddSpot = () => {
       cost,
       season,
       days,
-      userName,
-      userEmail,
     };
+    console.log(updateDetails);
 
-    // console.log(newSpot);
-
-    fetch("https://travel-europe-server.vercel.app/touristSpot", {
-      method: "POST",
+    // send data to the server
+    fetch(`https://travel-europe-server.vercel.app/touristSpot/${id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(newSpot),
+      body: JSON.stringify(updateDetails),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
+        console.log(data);
+        if (data.modifiedCount > 0) {
           Swal.fire({
             title: "Success!",
-            text: "Data added Successfully",
+            text: "Data updated Successfully",
             icon: "success",
             confirmButtonText: "Done",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate(naviGate);
+            }
           });
-          form.reset();
         }
       });
   };
-
   return (
-    <div className="bg-[#F4F3F0] pt-5 max-h-full ">
-      <Helmet>
-        <title>Add Spot</title>
-      </Helmet>
-      {/* <h2 className="text-5xl font-bold text-center mb-10">
-        Add Tourist Spots
-      </h2> */}
+    <div>
       <form
         onSubmit={handleDetails}
         className=" w-10/12 md:w-10/12 lg:w-8/12 mx-auto "
@@ -185,7 +177,7 @@ const AddSpot = () => {
         </div>
         <input
           type="submit"
-          value="Add New Location"
+          value="Update spot details"
           className="btn btn-block mb-10 bg-slate-700 text-white hover:bg-slate-700 hover:text-base"
         />
       </form>
@@ -193,4 +185,4 @@ const AddSpot = () => {
   );
 };
 
-export default AddSpot;
+export default UpdateDetails;

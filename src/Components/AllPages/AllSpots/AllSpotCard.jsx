@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { FaUserFriends } from "react-icons/fa";
+import { GiDarkSquad } from "react-icons/gi";
 import { IoMdTimer } from "react-icons/io";
-import { MdAttachMoney, MdLocationPin } from "react-icons/md";
+import { MdAttachMoney } from "react-icons/md";
 
-const AllSpotCard = ({ countri, countries, setCountries }) => {
+const AllSpotCard = ({ countri}) => {
   const [isHovered, setIsHovered] = useState(false);
   const {
     country,
@@ -39,7 +39,7 @@ const AllSpotCard = ({ countri, countries, setCountries }) => {
             {season}
           </p>
           <p className="flex items-center ">
-            <FaUserFriends className="mr-2" />
+            <GiDarkSquad className="mr-2" />
             <span className=" font-bold mr-1">{totalVisitorsPerYear}</span>visitors
             per year
           </p>

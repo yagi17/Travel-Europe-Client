@@ -13,6 +13,7 @@ import Authentication from "./AuthProvider/Authentication";
 import SignUp from "./AuthProvider/SignUp";
 import Home from "./Components/AllPages/HomePage/Home";
 import PrivateRoute from "./PrivateRoute";
+import UpdateDetails from "./Components/AllPages/MyList/UpdateDetails";
 
 const router = createBrowserRouter([
   {
@@ -23,21 +24,38 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch("http://localhost:5000/country"),
+        loader: () => fetch("https://travel-europe-server.vercel.app/country"),
       },
       {
         path: "/allspot",
-        element: <PrivateRoute><AllSpot></AllSpot></PrivateRoute>,
-        loader: () => fetch("http://localhost:5000/touristSpot"),
+        element: (
+          <PrivateRoute>
+            <AllSpot></AllSpot>
+          </PrivateRoute>
+        ),
+        loader: () => fetch("https://travel-europe-server.vercel.app/touristSpot"),
       },
       {
         path: "/addspot",
-        element: <PrivateRoute><AddSpot></AddSpot></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <AddSpot></AddSpot>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/updateDetails/:id",
+        element: <PrivateRoute><UpdateDetails></UpdateDetails></PrivateRoute>,
+        loader: ({ params }) => fetch(`https://travel-europe-server.vercel.app/touristSpot/${params._id}`)
       },
       {
         path: "/mylist",
-        element: <PrivateRoute><MyList></MyList></PrivateRoute>,
-        loader: () => fetch("http://localhost:5000/touristSpot"),
+        element: (
+          <PrivateRoute>
+            <MyList></MyList>
+          </PrivateRoute>
+        ),
+        loader: () => fetch("https://travel-europe-server.vercel.app/touristSpot"),
       },
       {
         path: "/login",
