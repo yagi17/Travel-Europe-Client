@@ -27,10 +27,10 @@ const Authentication = ({ children }) => {
   };
 
   // sign in user
-  const signIn = (email, password)=>{
+  const signIn = (email, password) => {
     setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password)
-  }
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
   // google login
   const googleLogIn = () => {
@@ -51,13 +51,25 @@ const Authentication = ({ children }) => {
   };
 
   useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+      const user = JSON.parse(savedUser);
+      setUser(user);
+    }
+
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setLoading(false);
         setUser(currentUser);
+
+        // Also save user in localStorage
+        localStorage.setItem("user", JSON.stringify(currentUser));
       } else {
         setLoading(false);
         setUser(currentUser);
+
+        // Remove user from localStorage
+        localStorage.removeItem("user");
       }
     });
     return () => unsubscribe();

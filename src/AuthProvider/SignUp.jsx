@@ -90,7 +90,7 @@ const SignUp = () => {
       setPasswordError(passwordError);
       return;
     }
-
+    
     setEmailError();
 
     // Create user using authentication service
@@ -121,7 +121,7 @@ const SignUp = () => {
           });
       })
       .catch((error) => {
-        console.log(error.message);
+        // console.log(error.message);
         if (error.message === "Firebase: Error (auth/email-already-in-use).") {
           setEmailError("Email already in use");
         }
@@ -148,7 +148,7 @@ const SignUp = () => {
                   <span className="label-text">Name</span>
                 </label>
                 <input
-                  type="email"
+                  type="text"
                   name="name"
                   placeholder="Name"
                   className="input input-bordered"
@@ -178,7 +178,7 @@ const SignUp = () => {
                   <span className="label-text">Image URL</span>
                 </label>
                 <input
-                  type="email"
+                  type="url"
                   name="image"
                   placeholder="Image URL"
                   className="input input-bordered"

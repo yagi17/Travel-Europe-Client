@@ -3,6 +3,7 @@ import { FaGithub } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import UseAuth from "./UseAuth";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { googleLogIn, gitHubLogin, signIn } = UseAuth();
@@ -17,12 +18,58 @@ const Login = () => {
     });
   };
 
-  const handleLogin = (e)=>{
-    e.preventDefault()
-    const form = e.target
-    const email = form.email.value
-    console.log(email);
-  }
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    // console.log(email);
+    signIn(email, password)
+      .then((result) => {
+        if (result.user) {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            },
+          });
+          Toast.fire({
+            icon: "success",
+            title: "Logged in successfully",
+          });
+          navigate(naviGate);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.message === "Firebase: Error (auth/invalid-credential).") {
+          Swal.fire({
+            icon: "error",
+            title: "Invalid credential",
+            text: "Wrong email or password",
+            footer: '<a href="/login">Try again</a>',
+          });
+        }
+        if (
+          error.message ===
+          "Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests)."
+        ) {
+          Swal.fire({
+            icon: "error",
+            title: "Too many request",
+            text: "Try again letter",
+          });
+        }
+      });
+  };
 
   //  toggle show password
   const [showPassword, setShowPassword] = useState(false);
@@ -37,9 +84,7 @@ const Login = () => {
             <h1 className="text-5xl font-bold">Sign in!</h1>
           </div>
           <div className="card shrink-0 w-96 shadow-2xl bg-base-100">
-            <form 
-            onSubmit={handleLogin}
-            className="card-body pb-0">
+            <form onSubmit={handleLogin} className="card-body pb-0">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>

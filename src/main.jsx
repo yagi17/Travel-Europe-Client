@@ -12,6 +12,7 @@ import Error from "./Components/Shared/Error";
 import Authentication from "./AuthProvider/Authentication";
 import SignUp from "./AuthProvider/SignUp";
 import Home from "./Components/AllPages/HomePage/Home";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -26,16 +27,16 @@ const router = createBrowserRouter([
       },
       {
         path: "/allspot",
-        element: <AllSpot></AllSpot>,
+        element: <PrivateRoute><AllSpot></AllSpot></PrivateRoute>,
         loader: () => fetch("http://localhost:5000/touristSpot"),
       },
       {
         path: "/addspot",
-        element: <AddSpot></AddSpot>,
+        element: <PrivateRoute><AddSpot></AddSpot></PrivateRoute>,
       },
       {
         path: "/mylist",
-        element: <MyList></MyList>,
+        element: <PrivateRoute><MyList></MyList></PrivateRoute>,
         loader: () => fetch("http://localhost:5000/touristSpot"),
       },
       {
