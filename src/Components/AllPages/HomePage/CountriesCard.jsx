@@ -7,13 +7,13 @@ const CountriesCard = ({ countri, countries, setCountries }) => {
   return (
     <div>
       <div
-        className="card card-compact rounded-lg bg-base-100 h-[400px] shadow-xl"
+        className="card card-compact rounded-lg bg-base-100 h-[400px] shadow-xl mt-4 md:mt-0"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         <figure>
           <img
-            className={` transform transition duration-500 w-96 h-[200px]  ${
+            className={` transform transition duration-500 w-full h-[200px]  ${
               isHovered ? "scale-105" : "scale-100"
             }`}
             src={image}
@@ -25,7 +25,7 @@ const CountriesCard = ({ countri, countries, setCountries }) => {
             Country: {name}
             <div className="badge p-0 "><img className="w-6 rounded-full h-4" src={flag} alt="" /></div>
           </h2>
-          <p>{description}</p>
+          <p className="text-xs font-medium">{description}</p>
           <button className={`btn w-full mt-4 btn-primary transform transition duration-500 ${
               isHovered ? "text-lg" : "text-base"
             }`}><Link>View Spots</Link></button>

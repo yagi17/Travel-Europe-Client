@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MdLocationPin } from "react-icons/md";
 
 const AllSpotCard = ({ countri, countries, setCountries }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -16,7 +17,7 @@ const AllSpotCard = ({ countri, countries, setCountries }) => {
   return (
     <div>
       <div
-        className="card card-compact bg-base-100 shadow-xl"
+        className="card card-compact bg-base-100 shadow-xl mt-4 md:mt-0"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -33,10 +34,12 @@ const AllSpotCard = ({ countri, countries, setCountries }) => {
           <h2 className="card-title">Country: {country}</h2>
           <p>{description}</p>
           <p>Spot Name: {spotName}</p>
-          <p>Average Cost: {cost}</p>
-          <p>Travel Duration: {days}</p>
+          <div className="flex">
+            <p>Duration: {days}</p>
+            <p>Average Cost: {cost}</p>
+          </div>
           <p>Preferable Season: {season}</p>
-          <p>Location: {location}</p>
+          <p className="flex items-center"><MdLocationPin /> Location: {location}</p>
           {/* <p>Location: {location}</p> */}
         </div>
       </div>

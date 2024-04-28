@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { IoIosLogOut, IoIosLogIn } from "react-icons/io";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/Authentication";
-import { CiEdit } from "react-icons/ci";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+  console.log();
   const link = (
     <>
       <li>
@@ -67,7 +67,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar text-2xl font-semibold p-0">
+    <div className="navbar text-2xl font-semibold py-0 md:px-6">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -94,14 +94,14 @@ const Navbar = () => {
           </ul>
         </div>
         <Link to="/" className="text-xl flex items-center space-x-2">
-          <img className="size-8" src="/logo.png" alt="" />
-          <p>Travel Europe</p>
+          <img className="size-7" src="/logo.png" alt="" />
+          <p className="text-lg">Travel Europe</p>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{link}</ul>
       </div>
-      <div className="navbar-end group relative pr-4">
+      <div className="navbar-end group relative">
         {user ? (
           <div className="flex space-x-2">
             <div

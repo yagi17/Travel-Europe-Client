@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import AllSpotCard from "./AllSpotCard";
-import Footer from "../../Footer";
+import Footer from "../../Shared/Footer";
+import { Helmet } from "react-helmet";
 
 const AllSpot = () => {
   const data = useLoaderData();
@@ -17,7 +18,10 @@ const AllSpot = () => {
 
   return (
     <div>
-      <div className="mt-24 md:grid md:grid-cols-2 lg:grid lg:grid-cols-3 w-4/6 mx-auto gap-y-4 gap-6">
+      <Helmet>
+        <title>All Tourists Spot</title>
+      </Helmet>
+      <div className="mt-24 md:grid md:grid-cols-2 lg:grid lg:grid-cols-3 w-10/12 mx-auto gap-y-4 gap-6">
         {displayData.map((countri) => (
           <AllSpotCard
             key={countri._id}

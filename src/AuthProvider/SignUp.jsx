@@ -5,22 +5,24 @@ import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
+// SignUp component definition
 const SignUp = () => {
+  // Hooking into authentication service and navigation hooks
   const { createUser, googleLogIn, gitHubLogin } = UseAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
   const naviGate = location?.state || "/";
 
-  // send data og googleLogin, gitHubLogin
+  // Handler for social media sign-up/login
   const handleSocial = (socialProvider) => {
     socialProvider().then((result) => {
       if (result.user) {
         const email = result.user.email;
         const creationTime = result.user.metadata.creationTime;
         const user = { email, creationTime };
-        console.log(user);
 
+        // Post the user data to backend
         fetch("http://localhost:5000/users", {
           method: "POST",
           headers: {
@@ -32,6 +34,7 @@ const SignUp = () => {
           .then((data) => {
             console.log(data);
             if (data.insertedId) {
+              // Notify user of success
               Swal.fire({
                 title: "User has been created successfully!",
                 icon: "success",
@@ -39,14 +42,17 @@ const SignUp = () => {
             }
           });
 
+        // Redirect user after successful login
         navigate(naviGate);
       }
     });
   };
 
+  // State for form error messages
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
+  // Validate password strength
   const validatePassword = (password) => {
     // Check for uppercase letter
     if (!/[A-Z]/.test(password)) {
@@ -63,16 +69,20 @@ const SignUp = () => {
     return "";
   };
 
+  // Update error message based on password input
   const handlePasswordChange = (e) => {
     const password = e.target.value;
     const passwordError = validatePassword(password);
     setPasswordError(passwordError);
   };
 
+  // Handle sign-up form submission
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
+    const name = form.name.value;
     const email = form.email.value;
+    const image = form.image.value;
     const password = form.password.value;
 
     const passwordError = validatePassword(password);
@@ -83,14 +93,15 @@ const SignUp = () => {
 
     setEmailError();
 
-    googleLogIn();
-
+    // Create user using authentication service
     createUser(email, password)
       .then((result) => {
         navigate("/");
         console.log(result.user);
         const createTime = result.user.metadata.creationTime;
         const user = { email, password, creationTime: createTime };
+
+        // Post the user data to backend
         fetch("http://localhost:5000/users", {
           method: "POST",
           headers: {
@@ -117,7 +128,7 @@ const SignUp = () => {
       });
   };
 
-  //   toggle show password
+  // Toggle password visibility
   const [showPassword, setShowPassword] = useState(false);
   const togglePassword = () => {
     setShowPassword(!showPassword);
@@ -134,12 +145,42 @@ const SignUp = () => {
             <form onSubmit={handleSignUp} className="card-body pb-0">
               <div className="form-control">
                 <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input
+                  type="email"
+                  name="name"
+                  placeholder="Name"
+                  className="input input-bordered"
+                  required
+                />
+                {emailError && (
+                  <p className="text-red-500 text-xs mt-1 pl-2">{emailError}</p>
+                )}
+              </div>
+              <div className="form-control">
+                <label className="label">
                   <span className="label-text">Email</span>
                 </label>
                 <input
                   type="email"
                   name="email"
                   placeholder="email"
+                  className="input input-bordered"
+                  required
+                />
+                {emailError && (
+                  <p className="text-red-500 text-xs mt-1 pl-2">{emailError}</p>
+                )}
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Image URL</span>
+                </label>
+                <input
+                  type="email"
+                  name="image"
+                  placeholder="Image URL"
                   className="input input-bordered"
                   required
                 />

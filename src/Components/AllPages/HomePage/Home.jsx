@@ -6,8 +6,9 @@ import "swiper/css/navigation";
 import { Autoplay, EffectCreative } from "swiper/modules";
 import { Link, useLoaderData } from "react-router-dom";
 import { useState } from "react";
-import Footer from "../../Footer";
 import CountriesCard from "./CountriesCard";
+import Footer from "../../Shared/Footer";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const data = useLoaderData().slice(0, 6);
@@ -16,12 +17,13 @@ const Home = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Travel Europe</title>
+      </Helmet>
       <div className="h-[600px] bg-[url(https://i.ibb.co/zx2tcDF/image.png)] bg-cover z-10 bg-no-repeat ">
-
         {/* banner */}
         <div className="hero-overlay bg-opacity-80 h-full items-center">
           <div className="lg:grid grid-cols-4 md:py-24 items-center lg:px-20 gap-10">
-
             {/* intro text */}
             <div className="col-span-2 flex flex-col justify-center text-white text-4xl">
               <h1 className="text-5xl font-bold ">
@@ -121,7 +123,7 @@ const Home = () => {
         <h2 className="text-center text-5xl text-green-500 font-bold">
           Choose Your Next Destination
         </h2>
-        <div className="mt-24 md:grid md:grid-cols-2 lg:grid lg:grid-cols-3 w-4/6 mx-auto gap-y-4 gap-6">
+        <div className="mt-24 md:grid md:grid-cols-2 lg:grid lg:grid-cols-3 w-5/6 mx-auto gap-y-4 gap-6">
           {countries.map((countri) => (
             <CountriesCard
               key={countri._id}
@@ -130,7 +132,9 @@ const Home = () => {
             ></CountriesCard>
           ))}
         </div>
-        <p className="link link-hover text-center mt-14 underline text-2xl font-semibold hover:text-blue-500"><Link to='allspot'>View More</Link></p>
+        <p className="link link-hover text-center mt-14 underline text-2xl font-semibold hover:text-blue-500">
+          <Link to="allspot">View More</Link>
+        </p>
       </div>
       <div className="mt-10">
         <Footer></Footer>

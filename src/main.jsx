@@ -3,14 +3,15 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./App";
-import AllSpot from "./Components/Navbar/Pages/AllSpot";
-import AddSpot from "./Components/Navbar/Pages/AddSpot";
-import MyList from "./Components/Navbar/Pages/MyList";
+import AllSpot from "./Components/AllPages/AllSpots/AllSpot";
+import AddSpot from "./Components/AllPages/AddSpot/AddSpot";
+import MyList from "./Components/AllPages/MyList/MyList";
 import Login from "./AuthProvider/Login";
-import Home from "./Components/Navbar/Pages/Home";
-import Error from "./Components/Navbar/Pages/Error";
+// import Home from "./Components/Navbar/Pages/HomePage/Home";
+import Error from "./Components/Shared/Error";
 import Authentication from "./AuthProvider/Authentication";
 import SignUp from "./AuthProvider/SignUp";
+import Home from "./Components/AllPages/HomePage/Home";
 
 const router = createBrowserRouter([
   {

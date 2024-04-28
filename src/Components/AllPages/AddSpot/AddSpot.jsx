@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import { useContext } from "react";
 import { AuthContext } from "../../../AuthProvider/Authentication";
+import { Helmet } from "react-helmet";
 
 const AddSpot = () => {
   const { user } = useContext(AuthContext);
@@ -11,11 +12,11 @@ const AddSpot = () => {
     const form = e.target;
     const country = form.countryName.value;
     const spotName = form.touristsSpot.value;
-    const location = form.location.value;
-    const description = form.description.value;
+    // const location = form.location.value;
+    const totalVisitorsPerYear = form.totalVisitorsPerYear.value;
     const cost = form.avgCost.value;
     const photo = form.photo.value;
-    const details = form.details.value;
+    // const details = form.details.value;
     const season = form.season.value;
     const days = form.days.value;
     const userName = user.displayName;
@@ -24,11 +25,9 @@ const AddSpot = () => {
     const newSpot = {
       country,
       spotName,
-      location,
-      description,
+      totalVisitorsPerYear,
       photo,
       cost,
-      details,
       season,
       days,
       userName,
@@ -60,15 +59,19 @@ const AddSpot = () => {
 
   return (
     <div className="bg-[#F4F3F0] pt-5 max-h-full ">
+      <Helmet>
+        <title>Add Spot</title>
+      </Helmet>
       {/* <h2 className="text-5xl font-bold text-center mb-10">
         Add Tourist Spots
       </h2> */}
-      <form 
-      onSubmit={handleCoffee} 
-      className=" w-8/12 mx-auto ">
+      <form
+        onSubmit={handleCoffee}
+        className=" w-10/12 md:w-10/12 lg:w-8/12 mx-auto "
+      >
         {/* form name and nic name row */}
-        <div className="md:flex mb-6 ">
-          <label className="form-control md:w-1/2 mr-4 relative">
+        <div className="md:flex md:mb-6 md:space-x-4">
+          <label className="form-control md:w-1/2 ">
             <div className="label">
               <span className="label-text text-xl font-semibold">
                 Country Name
@@ -93,27 +96,29 @@ const AddSpot = () => {
           <label className="form-control md:w-1/2">
             <div className="label">
               <span className="label-text text-xl font-semibold">
-                Tourists Spot
+                Tourists Spot Name
               </span>
             </div>
             <input
               type="text"
               name="touristsSpot"
-              placeholder="Tourists Spot"
+              placeholder="Tourists Spot Name"
               className="input input-bordered w-full"
             />
           </label>
         </div>
         {/* form discord and instagram row */}
-        <div className="md:flex mb-6">
-          <label className="form-control md:w-1/2 mr-4">
+        <div className="md:flex md:mb-6 md:space-x-4">
+          <label className="form-control md:w-1/2">
             <div className="label">
-              <span className="label-text text-xl font-semibold">Location</span>
+              <span className="label-text text-xl font-semibold">
+                Average Cost
+              </span>
             </div>
             <input
               type="text"
-              name="location"
-              placeholder="location"
+              name="avgCost"
+              placeholder="Average Cost"
               className="input input-bordered w-full"
             />
           </label>
@@ -121,40 +126,42 @@ const AddSpot = () => {
           <label className="form-control md:w-1/2">
             <div className="label">
               <span className="label-text text-xl font-semibold">
-                Description
+                Total Visitors Per Year
               </span>
             </div>
             <input
               type="text"
-              name="description"
-              placeholder="Description"
+              name="totalVisitorsPerYear"
+              placeholder="Total Visitors Per Year"
               className="input input-bordered w-full"
             />
           </label>
         </div>
         {/* form Cost and details row */}
-        <div className="md:flex mb-6 ">
-          <label className="form-control md:w-1/2 mr-4">
+        <div className="md:flex md:mb-6 md:space-x-4">
+          <label className="form-control md:w-1/2 -4">
             <div className="label">
               <span className="label-text text-xl font-semibold">
-                Avarage Cost
+                Seasonality
               </span>
             </div>
             <input
-              type="number"
-              name="avgCost"
-              placeholder="Avarage Cost"
+              type="text"
+              name="season"
+              placeholder="Seasonality"
               className="input input-bordered w-full"
             />
           </label>
 
           <label className="form-control md:w-1/2">
             <div className="label">
-              <span className="label-text text-xl font-semibold">Details</span>
+              <span className="label-text text-xl font-semibold">
+                Travel Time
+              </span>
             </div>
             <input
               type="text"
-              name="details"
+              name="days"
               placeholder="Available Quantity"
               className="input input-bordered w-full"
             />
@@ -176,68 +183,10 @@ const AddSpot = () => {
             />
           </label>
         </div>
-        <div className="md:flex gap-24 mb-6">
-          <div className="flex flex-col-reverse">
-            <div className="form-control">
-              <label className="label cursor-pointer gap-4">
-                <span className="label-text text-lg font-medium">Summer</span>
-                <input
-                  type="radio"
-                  name="season"
-                  value="Summer"
-                  className="radio radio-info"
-                  checked
-                />
-              </label>
-            </div>
-            <div className="form-control">
-              <label className="label cursor-pointer">
-                <span className="label-text text-lg font-medium">Winter</span>
-                <input
-                  type="radio"
-                  name="season"
-                  value="Winter"
-                  className="radio radio-info"
-                  checked
-                />
-              </label>
-            </div>
-            <span className="text-xl font-semibold">Seasonality</span>
-          </div>
-          <div className="flex flex-col-reverse">
-            <div className="form-control">
-              <label className="label cursor-pointer  gap-4">
-                <span className="label-text text-lg font-semibold">7 Days</span>
-                <input
-                  type="radio"
-                  name="days"
-                  value="7 Days"
-                  className="radio radio-info"
-                  checked
-                />
-              </label>
-            </div>
-            <div className="form-control">
-              <label className="label cursor-pointer">
-                <span className="label-text text-lg font-semibold">
-                  10 Days
-                </span>
-                <input
-                  type="radio"
-                  name="days"
-                  value="10 Days"
-                  className="radio radio-info"
-                  checked
-                />
-              </label>
-            </div>
-            <span className="text-xl font-semibold">Travel Time</span>
-          </div>
-        </div>
         <input
           type="submit"
           value="Add New Location"
-          className="btn btn-block bg-slate-700 text-white hover:bg-slate-700 hover:text-base"
+          className="btn btn-block mb-10 bg-slate-700 text-white hover:bg-slate-700 hover:text-base"
         />
       </form>
     </div>
