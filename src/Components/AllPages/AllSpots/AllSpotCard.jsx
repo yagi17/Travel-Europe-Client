@@ -19,7 +19,7 @@ const AllSpotCard = ({ countri }) => {
   return (
     <div>
       <div
-        className="card card-compact bg-base-100 shadow-xl mt-4 h-[440px] md:mt-0"
+        className="card card-compact bg-base-100 shadow-xl mt-4 h-[400px] md:mt-0"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >

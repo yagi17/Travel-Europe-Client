@@ -9,6 +9,7 @@ import { useState } from "react";
 import CountriesCard from "./CountriesCard";
 import Footer from "../../Shared/Footer";
 import { Helmet } from "react-helmet";
+import ExtraSection from "./ExtraSection";
 
 const Home = () => {
   const data = useLoaderData().slice(0, 6);
@@ -25,7 +26,7 @@ const Home = () => {
         <div className="hero-overlay bg-opacity-80 h-full items-center">
           <div className="lg:grid grid-cols-4 md:py-24 items-center lg:px-20 gap-10">
             {/* intro text */}
-            <div className="col-span-2 flex flex-col justify-center text-white text-4xl">
+            <div className="col-span-2 flex flex-col text-center justify-center text-white lg:text-3xl">
               <h1 className="text-5xl font-bold ">
                 A partner when you need it
               </h1>
@@ -53,7 +54,8 @@ const Home = () => {
                 </h1>
               </div>
             </div>
-            <div className="col-span-2 max-h-[400px] bg-transparent rounded-xl mt-8 lg:mt-0">
+            {/* slider */}
+            <div className="col-span-2 max-h-[400px] border border-red-500 bg-transparent rounded-xl mt-8 lg:mt-0">
               <Swiper
                 effect={"creative"}
                 autoplay={{
@@ -62,7 +64,6 @@ const Home = () => {
                 }}
                 creativeEffect={{
                   prev: {
-                    shadow: true,
                     translate: [0, 0, -400],
                   },
                   next: {
@@ -70,46 +71,46 @@ const Home = () => {
                   },
                 }}
                 modules={[EffectCreative, Autoplay]}
-                className="mySwiper"
+                className="mySwiper ml-20 mx-auto border border-red-500"
               >
                 <SwiperSlide>
                   <img
-                    className="h-[400px] w-[] rounded-xl"
+                    className="h-[400px] lg:w-fit rounded-xl"
                     src="https://www.state.gov/wp-content/uploads/2023/07/shutterstock_667548661v2.jpg"
                     alt="France"
                   />
                 </SwiperSlide>
                 <SwiperSlide>
                   <img
-                    className="h-[400px] w-[] rounded-xl"
+                    className="h-[400px] lg:w-fit rounded-xl"
                     src="https://www.state.gov/wp-content/uploads/2023/07/shutterstock_433413835v2.jpg"
                     alt="Italy"
                   />
                 </SwiperSlide>
                 <SwiperSlide>
                   <img
-                    className="h-[400px] w-[] rounded-xl"
+                    className="h-[400px] lg:w-fit rounded-xl"
                     src="https://www.civitatis.com/blog/wp-content/uploads/2023/07/shutterstock_557625622-scaled.jpg"
                     alt="Spain"
                   />
                 </SwiperSlide>
                 <SwiperSlide>
                   <img
-                    className="h-[400px] w-[] rounded-xl"
+                    className="h-[400px] lg:w-fit rounded-xl"
                     src="https://www.tripsavvy.com/thmb/hitaOIDM_pd-bQrp9eAuE1N4NyE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-174726708-9125b51de4e14e759e688c019a0f52ca.jpg"
                     alt="England"
                   />
                 </SwiperSlide>
                 <SwiperSlide>
                   <img
-                    className="h-[400px] w-[] rounded-xl"
+                    className="h-[400px] lg:w-fit rounded-xl"
                     src="https://s30876.pcdn.co/wp-content/uploads/Netherlands3-e1634207438966.jpg.optimal.jpg"
                     alt="Netherlands"
                   />
                 </SwiperSlide>
                 <SwiperSlide>
                   <img
-                    className="h-[400px] w-[] rounded-xl"
+                    className="h-[400px] lg:w-fit rounded-xl"
                     src="https://cdn.britannica.com/65/162465-050-9CDA9BC9/Alps-Switzerland.jpg"
                     alt="Switzerland"
                   />
@@ -133,10 +134,9 @@ const Home = () => {
             ></CountriesCard>
           ))}
         </div>
-        <p className="link link-hover text-center mt-14 underline text-2xl font-semibold hover:text-blue-500">
-          <Link to="allspot">View More</Link>
-        </p>
+
       </div>
+      <ExtraSection></ExtraSection>
       <div className="mt-10">
         <Footer></Footer>
       </div>

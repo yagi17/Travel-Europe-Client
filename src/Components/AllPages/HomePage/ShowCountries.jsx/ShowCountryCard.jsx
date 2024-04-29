@@ -2,7 +2,7 @@ import { useState } from "react";
 import { GiDarkSquad } from "react-icons/gi";
 import { IoMdTimer } from "react-icons/io";
 import { MdAttachMoney } from "react-icons/md";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const ShowCountryCard = ({ singleCountry }) => {
   function capitalizeFirstLetter(string) {
@@ -15,8 +15,8 @@ const ShowCountryCard = ({ singleCountry }) => {
   //   const { name } = useParams();
   //   console.log(name);
   const [isHovered, setIsHovered] = useState(false);
-  const { country, spotName, totalVisitorsPerYear, photo, cost, season, days } =
-    singleCountry;
+  const { country, spotName, totalVisitorsPerYear, photo, cost, season, days, _id } = singleCountry;
+
 //   console.log(singleCountry);
 
   if (capitalizedName !== country) {
@@ -25,7 +25,7 @@ const ShowCountryCard = ({ singleCountry }) => {
 
   return (
     <div
-      className="card card-compact bg-base-100 shadow-xl mt-4 h-[450px] md:mt-0"
+      className="card card-compact bg-base-100 shadow-xl mt-4 h-[400px] md:mt-0"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -61,7 +61,7 @@ const ShowCountryCard = ({ singleCountry }) => {
           </p>
         </div>
 
-        <button className="btn btn-primary mt-4">View Details</button>
+        <button className="btn btn-primary mt-4"><Link to={`/viewDetails/${_id}`}>View Details</Link></button>
       </div>
     </div>
   );
