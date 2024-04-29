@@ -14,6 +14,7 @@ import SignUp from "./AuthProvider/SignUp";
 import Home from "./Components/AllPages/HomePage/Home";
 import PrivateRoute from "./PrivateRoute";
 import UpdateDetails from "./Components/AllPages/MyList/UpdateDetails";
+import ShowCountrySpots from "./Components/AllPages/HomePage/ShowCountries.jsx/ShowCountrySpots";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,11 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/showLocation/:name",
+        element: <PrivateRoute><ShowCountrySpots></ShowCountrySpots></PrivateRoute>,
+        loader: () => fetch("http://localhost:5000/country/France"),
       },
     ],
   },

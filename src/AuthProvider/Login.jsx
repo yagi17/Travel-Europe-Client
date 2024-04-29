@@ -49,7 +49,7 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         if (error.message === "Firebase: Error (auth/invalid-credential).") {
           Swal.fire({
             icon: "error",

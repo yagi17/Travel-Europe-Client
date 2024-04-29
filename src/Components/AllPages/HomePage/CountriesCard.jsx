@@ -7,7 +7,7 @@ const CountriesCard = ({ countri, countries, setCountries }) => {
   return (
     <div>
       <div
-        className="card card-compact rounded-lg bg-base-100 h-[400px] shadow-xl mt-4 md:mt-0"
+        className="card card-compact rounded-lg bg-gray-300 text-black h-[400px] shadow-xl mt-4 md:mt-0"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -28,7 +28,7 @@ const CountriesCard = ({ countri, countries, setCountries }) => {
           <p className="text-xs font-medium">{description}</p>
           <button className={`btn w-full mt-4 btn-primary transform transition duration-500 ${
               isHovered ? "text-lg" : "text-base"
-            }`}><Link>View Spots</Link></button>
+            }`}><Link to={`/showLocation/${name}`}>View Spots</Link></button>
         </div>
       </div>
     </div>

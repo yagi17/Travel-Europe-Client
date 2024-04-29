@@ -28,7 +28,7 @@ const UpdateDetails = () => {
       season,
       days,
     };
-    console.log(updateDetails);
+    // console.log(updateDetails);
 
     // send data to the server
     fetch(`https://travel-europe-server.vercel.app/touristSpot/${id}`, {
@@ -40,7 +40,7 @@ const UpdateDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.modifiedCount > 0) {
           Swal.fire({
             title: "Success!",

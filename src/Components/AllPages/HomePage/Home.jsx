@@ -120,10 +120,10 @@ const Home = () => {
         </div>
       </div>
       <div className="mt-24">
-        <h2 className="text-center text-5xl text-green-500 font-bold">
+        <h2 className="text-center text-4xl text-green-500 font-bold">
           Choose Your Next Destination
         </h2>
-        <h2 className="text-center text-5xl text-green-500 font-bold">Know more about europe's best tourist spots.</h2>
+        <h2 className="text-center font-bold">Know more about europe's best tourist spots.</h2>
         <div className="mt-24 md:grid md:grid-cols-2 lg:grid lg:grid-cols-3 w-5/6 mx-auto gap-y-4 gap-6">
           {countries.map((countri) => (
             <CountriesCard

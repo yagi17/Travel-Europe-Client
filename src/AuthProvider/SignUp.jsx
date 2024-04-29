@@ -97,7 +97,7 @@ const SignUp = () => {
     createUser(email, password)
       .then((result) => {
         navigate("/");
-        console.log(result.user);
+        // console.log(result.user);
         const createTime = result.user.metadata.creationTime;
         const user = { email, password, creationTime: createTime };
 

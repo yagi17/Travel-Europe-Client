@@ -3,7 +3,7 @@ import { GiDarkSquad } from "react-icons/gi";
 import { IoMdTimer } from "react-icons/io";
 import { MdAttachMoney } from "react-icons/md";
 
-const AllSpotCard = ({ countri}) => {
+const AllSpotCard = ({ countri }) => {
   const [isHovered, setIsHovered] = useState(false);
   const {
     country,
@@ -19,7 +19,7 @@ const AllSpotCard = ({ countri}) => {
   return (
     <div>
       <div
-        className="card card-compact bg-base-100 shadow-xl mt-4 h-[450px] md:mt-0"
+        className="card card-compact bg-base-100 shadow-xl mt-4 h-[440px] md:mt-0"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -40,20 +40,20 @@ const AllSpotCard = ({ countri}) => {
           </p>
           <p className="flex items-center ">
             <GiDarkSquad className="mr-2" />
-            <span className=" font-bold mr-1">{totalVisitorsPerYear}</span>visitors
-            per year
+            <span className=" font-bold mr-1">{totalVisitorsPerYear}</span>
+            visitors per year
           </p>
-          <div className="flex ">
-            <p className="flex items-center">
-              {" "}
-              <IoMdTimer className="mr-1 font-semibold" /> {days}
-            </p>
+          <div className="flex flex-row">
             <p className="flex items-center">
               <span className="font-bold mr-1"> Cost :</span>
               {cost} USD
               <MdAttachMoney className="text-lg" />
             </p>
           </div>
+          <p className="flex items-center">
+            {" "}
+            <IoMdTimer className="mr-1 font-semibold" />{days}
+          </p>
 
           <button className="btn btn-primary mt-4">View Details</button>
         </div>

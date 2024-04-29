@@ -49,7 +49,7 @@ const MyList = () => {
               const remainingItems = myList.filter(
                 (listItem) => listItem._id !== id
               );
-              console.log(remainingItems._id);
+              // console.log(remainingItems._id);
               setMyList(remainingItems);
             }
           });

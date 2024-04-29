@@ -4,7 +4,7 @@ import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-blue-300 py-16">
+    <footer className="w-full bg-blue-300 py-16 text-black">
       <div className="w-full flex justify-center text-center mx-auto gap-5">
         <h2><Link to="/about">About</Link></h2> 
         <h2><Link to="/contact">Contact</Link></h2>
