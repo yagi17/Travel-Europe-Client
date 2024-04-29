@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from 'prop-types';
 import { GiDarkSquad } from "react-icons/gi";
 import { IoMdTimer } from "react-icons/io";
 import { MdAttachMoney } from "react-icons/md";
@@ -67,4 +68,18 @@ const ShowCountryCard = ({ singleCountry }) => {
   );
 };
 
+ShowCountryCard.propTypes = {
+  singleCountry: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    country: PropTypes.string.isRequired,
+    spotName: PropTypes.string.isRequired,
+    totalVisitorsPerYear: PropTypes.string.isRequired,
+    photo: PropTypes.string.isRequired,
+    cost: PropTypes.string.isRequired,
+    season: PropTypes.string.isRequired,
+    days: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
 export default ShowCountryCard;
+

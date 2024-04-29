@@ -21,7 +21,7 @@ const Navbar = () => {
   }, []);
 
   const { user, logout } = useContext(AuthContext);
-  // console.log();
+  console.log(user);
   const link = (
     <>
       <li>

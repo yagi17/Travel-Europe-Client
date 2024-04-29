@@ -55,7 +55,7 @@ const Home = () => {
               </div>
             </div>
             {/* slider */}
-            <div className="col-span-2 max-h-[400px] border border-red-500 bg-transparent rounded-xl mt-8 lg:mt-0">
+            <div className="col-span-2 max-h-[400px] bg-transparent rounded-xl mt-8 lg:mt-0">
               <Swiper
                 effect={"creative"}
                 autoplay={{
@@ -71,7 +71,7 @@ const Home = () => {
                   },
                 }}
                 modules={[EffectCreative, Autoplay]}
-                className="mySwiper ml-20 mx-auto border border-red-500"
+                className="mySwiper ml-20 mx-auto "
               >
                 <SwiperSlide>
                   <img

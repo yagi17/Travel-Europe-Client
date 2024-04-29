@@ -8,7 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 // SignUp component definition
 const SignUp = () => {
   // Hooking into authentication service and navigation hooks
-  const { createUser, googleLogIn, gitHubLogin } = UseAuth();
+  const { createUser, googleLogIn, gitHubLogin, updateUserProfile, setLoading } = UseAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -90,34 +90,48 @@ const SignUp = () => {
       setPasswordError(passwordError);
       return;
     }
-    
-    setEmailError();
+
+    setEmailError("");
 
     // Create user using authentication service
     createUser(email, password)
       .then((result) => {
-        navigate("/");
-        // console.log(result.user);
-        const createTime = result.user.metadata.creationTime;
-        const user = { email, password, creationTime: createTime };
+        // Update user profile
+        updateUserProfile(name, image)
+          .then(() => {
+            setLoading(true)
+            navigate("/");
+            console.log(result.user);
+            const createTime = result.user.metadata.creationTime;
+            const user = {
+              email,
+              password,
+              image,
+              name,
+              creationTime: createTime,
+            };
 
-        // Post the user data to backend
-        fetch("https://travel-europe-server.vercel.app/users", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(user),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            // console.log(data);
-            if (data.insertedId) {
-              Swal.fire({
-                title: "User has been created successfully!",
-                icon: "success",
+            // Post the user data to backend
+            fetch("https://travel-europe-server.vercel.app/users", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(user),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                // console.log(data);
+                if (data.insertedId) {
+                  Swal.fire({
+                    title: "User has been created successfully!",
+                    icon: "success",
+                  });
+                }
               });
-            }
+          })
+          .catch((error) => {
+            console.error("Error updating user profile: ", error);
           });
       })
       .catch((error) => {

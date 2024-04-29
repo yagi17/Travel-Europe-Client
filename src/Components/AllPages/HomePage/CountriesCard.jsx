@@ -1,7 +1,8 @@
 import { useState } from "react";
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
-const CountriesCard = ({ countri, countries, setCountries }) => {
+const CountriesCard = ({ countri}) => {
   const [isHovered, setIsHovered] = useState(false);
   const { name, image, description, flag } = countri;
   return (
@@ -33,6 +34,17 @@ const CountriesCard = ({ countri, countries, setCountries }) => {
       </div>
     </div>
   );
+};
+
+CountriesCard.propTypes = {
+  countri: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    flag: PropTypes.string.isRequired,
+  }).isRequired,
+  countries: PropTypes.array.isRequired,
+  setCountries: PropTypes.func.isRequired,
 };
 
 export default CountriesCard;
