@@ -101,7 +101,7 @@ const SignUp = () => {
           .then(() => {
             setLoading(true)
             navigate("/");
-            console.log(result.user);
+            // console.log(result.user);
             const createTime = result.user.metadata.creationTime;
             const user = {
               email,

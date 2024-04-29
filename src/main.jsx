@@ -53,9 +53,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(
-            `https://travel-europe-server.vercel.app/touristSpot/${params._id}`
-          ),
+          fetch(`https://travel-europe-server.vercel.app/touristSpot/${params.id}`),
       },
       {
         path: "/mylist",
@@ -82,10 +80,7 @@ const router = createBrowserRouter([
             <ShowCountryDetails></ShowCountryDetails>
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(
-            `https://travel-europe-server.vercel.app/touristSpot/${params._id}`
-          ),
+        loader: ({ params }) => fetch(`https://travel-europe-server.vercel.app/touristSpot/${params.id}`),
       },
       {
         path: "/showLocation/:name",

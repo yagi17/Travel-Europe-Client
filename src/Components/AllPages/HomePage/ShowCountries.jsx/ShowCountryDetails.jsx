@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 const ShowCountryDetails = () => {
   const { id } = useParams();
-  // console.log(id);
+  console.log(id);
 
   const [showDetails, setShowDetails] = useState();
   const [isHovered, setIsHovered] = useState(false);
@@ -15,7 +15,7 @@ const ShowCountryDetails = () => {
     fetch(`https://travel-europe-server.vercel.app/touristSpot`)
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
+        console.log(data);
         const matchedData = data.find((item) => item._id === id);
         setShowDetails(matchedData);
       });
