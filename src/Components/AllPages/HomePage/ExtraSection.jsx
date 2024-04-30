@@ -1,8 +1,8 @@
 const ExtraSection = () => {
   return (
-    <div className="mt-10">
-      <div className="w-10/12 mx-auto space-y-2 text-black">
-        <h2 className="text-5xl font-semibold text-center mb-10">F A Q</h2>
+    <div className="mt-10 grid md:grid-cols-2 gap-6 w-10/12 mx-auto">
+      <div className="w-full py-4 mx-auto space-y-2 text-black border-t-4 border-gray-600 rounded-lg">
+        <h2 className="text-3xl font-bold text-center mb-5">F A Q</h2>
         <div className="collapse collapse-arrow bg-blue-300 mt-10">
           <input type="radio" name="my-accordion-2" defaultChecked />
           <div className="collapse-title text-xl font-medium">
@@ -24,17 +24,26 @@ const ExtraSection = () => {
         <div className="collapse collapse-arrow bg-blue-300">
           <input type="radio" name="my-accordion-2" />
           <div className="collapse-title text-xl font-medium">
-            Is there any discount for students
+            Is there any discount for students ?
+          </div>
+          <div className="collapse-content">
+            <p>We don't have any discount at this moment</p>
+          </div>
+        </div>
+        <div className="collapse collapse-arrow bg-blue-300">
+          <input type="radio" name="my-accordion-2" />
+          <div className="collapse-title text-xl font-medium">
+            Is there any discount for students ?
           </div>
           <div className="collapse-content">
             <p>We don't have any discount at this moment</p>
           </div>
         </div>
       </div>
-      <div>
-        <section className="w-10/12 mx-auto text-black">
-          <div className="py-2 px-4 mx-auto  max-w-screen-md">
-            <div className="w-full rounded-lg text-5xl font-bold text-center my-10">
+      <div className="border-t-4 py-4 border-gray-600 rounded-lg">
+        <section className="w-12/12 mx-auto text-black">
+          <div className="py-2 px-4 mx-auto max-w-screen-md">
+            <div className="w-full rounded-lg text-3xl font-bold text-center">
               <p>Get In Touch</p>
             </div>
             <form action="#" className="space-y-8">
