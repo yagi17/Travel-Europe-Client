@@ -1,20 +1,33 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Typewriter } from "react-simple-typewriter";
 import "swiper/css";
+import PropTypes from "prop-types";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, EffectCreative } from "swiper/modules";
 import { Link, useLoaderData } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CountriesCard from "./CountriesCard";
 import Footer from "../../Shared/Footer";
 import { Helmet } from "react-helmet";
 import ExtraSection from "./ExtraSection";
+import HomePageSpots from "./HomePageSpots";
 
 const Home = () => {
   const data = useLoaderData().slice(0, 6);
 
   const [countries, setCountries] = useState(data);
+  const [spot, setSpot] = useState([]);
+  const someSpot = spot?.slice(0, 6);
+  console.log(someSpot);
+  useEffect(() => {
+    fetch("https://travel-europe-server.vercel.app/touristSpot")
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        setSpot(data);
+      });
+  }, []);
 
   return (
     <div>
@@ -120,12 +133,14 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="mt-24">
+      <div className="mt-20">
         <h2 className="text-center text-4xl text-green-500 font-bold">
           Choose Your Next Destination
         </h2>
-        <h2 className="text-center font-bold">Know more about europe's best tourist spots.</h2>
-        <div className="mt-24 md:grid md:grid-cols-2 lg:grid lg:grid-cols-3 w-5/6 mx-auto gap-y-4 gap-6">
+        <h2 className="text-center mt-2">
+          Know More About Europe's Best Countries To Visit.
+        </h2>
+        <div className="mt-10 md:grid md:grid-cols-2 lg:grid lg:grid-cols-3 w-5/6 mx-auto gap-y-4 gap-6">
           {countries.map((countri) => (
             <CountriesCard
               key={countri._id}
@@ -134,7 +149,25 @@ const Home = () => {
             ></CountriesCard>
           ))}
         </div>
-
+      </div>
+      <div className="w-10/12 mx-auto gap-4">
+        <h2 className="text-center text-2xl font-semibold divider">
+          Europe's Famous Tourist Spots
+        </h2>
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 col-span-1 gap-4">
+          {someSpot.map((spot) => (
+            <HomePageSpots key={spot._id} spot={spot}></HomePageSpots>
+          ))}
+        </div>
+        <p className="text-center mt-4">
+          {" "}
+          <Link
+            to={"/allspot"}
+            className="link hover:text-blue-400"
+          >
+            See More
+          </Link>
+        </p>
       </div>
       <ExtraSection></ExtraSection>
       <div className="mt-10">
@@ -142,6 +175,15 @@ const Home = () => {
       </div>
     </div>
   );
+};
+
+CountriesCard.propTypes = {
+  countri: PropTypes.object.isRequired,
+  setCountries: PropTypes.func.isRequired,
+};
+
+HomePageSpots.propTypes = {
+  spot: PropTypes.object.isRequired,
 };
 
 export default Home;

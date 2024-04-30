@@ -29,7 +29,7 @@ const Navbar = () => {
           to="/"
           className={({ isActive, isPending }) =>
             isActive
-              ? "bg-transparent  hover:bg-transparent"
+              ? "bg-transparent hover:bg-transparent border-b-4 border-black"
               : isPending
               ? "pending"
               : "pending"
@@ -43,7 +43,7 @@ const Navbar = () => {
           to="/allspot"
           className={({ isActive, isPending }) =>
             isActive
-              ? "bg-transparent  hover:bg-transparent"
+              ? "bg-transparent hover:bg-transparent border-b-4 border-black"
               : isPending
               ? "pending"
               : "pending"
@@ -57,7 +57,7 @@ const Navbar = () => {
           to="/addspot"
           className={({ isActive, isPending }) =>
             isActive
-              ? "bg-transparent  hover:bg-transparent"
+              ? "bg-transparent hover:bg-transparent border-b-4 border-black"
               : isPending
               ? "pending"
               : "pending"
@@ -71,7 +71,7 @@ const Navbar = () => {
           to="/mylist"
           className={({ isActive, isPending }) =>
             isActive
-              ? "bg-transparent  hover:bg-transparent"
+              ? "bg-transparent hover:bg-transparent border-b-4 border-black"
               : isPending
               ? "pending"
               : "pending"

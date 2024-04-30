@@ -4,7 +4,7 @@ import { IoMdTimer } from "react-icons/io";
 import { MdAttachMoney } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-const AllSpotCard = ({ countri }) => {
+const HomePageSpots = ({spot}) => {
   const [isHovered, setIsHovered] = useState(false);
   const {
     _id,
@@ -15,13 +15,11 @@ const AllSpotCard = ({ countri }) => {
     cost,
     season,
     days,
-    userName,
-    userEmail,
-  } = countri;
+  } = spot;
   return (
     <div>
       <div
-        className="card card-compact bg-base-100 shadow-xl mt-4 h-[450px] md:mt-0"
+        className="card card-compact bg-base-100 border border-blue-300 h-[400px] md:mt-0"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -54,15 +52,17 @@ const AllSpotCard = ({ countri }) => {
           </div>
           <p className="flex items-center">
             {" "}
-            <IoMdTimer className="mr-1 font-semibold" />{days}
+            <IoMdTimer className="mr-1 font-semibold" />
+            {days}
           </p>
 
-          <Link to={`/viewDetails/${_id}`} className="btn btn-primary mt-4">View Details</Link >
-          
+          <Link to={`/viewDetails/${_id}`} className="btn btn-primary mt-4">
+            View Details
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default AllSpotCard;
+export default HomePageSpots;

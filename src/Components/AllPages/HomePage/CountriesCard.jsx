@@ -8,7 +8,7 @@ const CountriesCard = ({ countri}) => {
   return (
     <div>
       <div
-        className="card card-compact rounded-lg bg-gray-300 text-black h-[400px] shadow-xl mt-4 md:mt-0"
+        className="card card-compact rounded-lg bg-gray-300 text-black h-[400px] mt-4 md:mt-0"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
