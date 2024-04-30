@@ -151,7 +151,7 @@ const Home = () => {
         </div>
       </div>
       <div className="w-10/12 mx-auto gap-4">
-        <h2 className="text-center text-2xl font-semibold divider">
+        <h2 className="text-center text-3xl font-semibold divider my-10">
           Europe's Famous Tourist Spots
         </h2>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 col-span-1 gap-4">
